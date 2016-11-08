@@ -266,14 +266,14 @@
     if (synchronizedMovieWriter != nil)
     {
         [synchronizedMovieWriter setVideoInputReadyCallback:^{
-            BOOL success = [weakSelf readNextVideoFrameFromOutput:readerVideoTrackOutput];
+           __unused BOOL success = [weakSelf readNextVideoFrameFromOutput:readerVideoTrackOutput];
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
             return success;
 #endif
         }];
 
         [synchronizedMovieWriter setAudioInputReadyCallback:^{
-            BOOL success = [weakSelf readNextAudioSampleFromOutput:readerAudioTrackOutput];
+            __unused BOOL success = [weakSelf readNextAudioSampleFromOutput:readerAudioTrackOutput];
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
             return success;
 #endif

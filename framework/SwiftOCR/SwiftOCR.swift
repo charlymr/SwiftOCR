@@ -667,7 +667,7 @@ open class SwiftOCR {
         for yPixelInfo in stride(from: 0, to: height*width*numberOfComponents, by: width*numberOfComponents) {
             for xPixelInfo in stride(from: 0, to: width*numberOfComponents, by: numberOfComponents) {
                 let pixelInfo: Int = yPixelInfo + xPixelInfo
-                imageData.append(bitmapData[pixelInfo] < 127 ? 0 : 1)
+                imageData.append(bitmapData?[pixelInfo] < 127 ? 0 : 1)
             }
         }
         

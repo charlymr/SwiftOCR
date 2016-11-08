@@ -118,7 +118,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             
             trainingProgressIndicator.startAnimation(nil)
             
-            DispatchQueue.global(priority: .high).async {
+            DispatchQueue.global(qos: .userInteractive).async(execute: {
                 
                 var callbackCount      = 0
                 var minimumError:Float = Float.infinity {
@@ -151,7 +151,7 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
                     }
                 }
                 
-            }
+            })
             
         }
         
@@ -173,13 +173,13 @@ class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         startTrainingButton.title = "Start Training"
         isTraining = false
 
-        DispatchQueue.global(priority: .default).async {
+        DispatchQueue.global(qos: .default).async(execute: {
             self.trainingInstance.testOCR() {accuracy in
                 DispatchQueue.main.async {
                     self.accuracyLabel.stringValue = "Accuracy: \(round(accuracy * 1000) / 10)%"
                 }
             }
-        }
+        })
     }
 }
 
