@@ -201,6 +201,7 @@ public struct FFNN {
     /// Propagates the given inputs through the neural network, returning the network's output.
     /// - Parameter inputs: An array of `Float`s, each element corresponding to one input node.
     /// - Returns: The network's output after applying the given inputs, as an array of `Float`s.
+    @discardableResult
     public mutating func update(inputs: [Float]) throws -> [Float] {
         // Ensure that the correct number of inputs is given
         guard inputs.count == self.numInputs else {
@@ -240,6 +241,7 @@ public struct FFNN {
     /// Trains the network by comparing its most recent output to the given 'answers', adjusting the network's weights as needed.
     /// - Parameter answer: The 'correct' desired output for the most recent update to the network, as an array of `Float`s.
     /// - Returns: The total calculated error from the most recent update.
+    @discardableResult
     public mutating func backpropagate(answer: [Float]) throws -> Float {
         // Verify valid answer
         guard answer.count == self.numOutputs else {
@@ -309,6 +311,7 @@ public struct FFNN {
     ///     - errorThreshold: A `Float` indicating the maximum error allowed per epoch of validation data, before the network is considered 'trained'.
     ///             This value must be determined by the user, because it varies based on the type of data used and the desired accuracy.
     /// - Returns: The final calculated weights of the network after training has completed.
+    @discardableResult
     public mutating func train(inputs: [[Float]], answers: [[Float]], testInputs: [[Float]], testAnswers: [[Float]], errorThreshold: Float, shouldContinue: (Float) -> Bool = {_ in return true}) throws -> [Float] {
         guard errorThreshold > 0 else {
             throw FFNNError.invalidInputsError("Error threshold must be greater than zero!")
